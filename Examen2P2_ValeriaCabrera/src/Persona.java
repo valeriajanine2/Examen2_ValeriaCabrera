@@ -8,7 +8,7 @@
  *
  * @author Usuario
  */
-public class Persona {
+public abstract class Persona {
     
     private String nombre;
     private String apellido;
@@ -52,6 +52,6 @@ public class Persona {
         return nombre+" "+apellido;
     }
     
-    
+    public abstract int enviar(Usuario u);
     
 }

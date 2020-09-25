@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
@@ -11,7 +12,9 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class Usuario extends Persona {
+public class Usuario extends Persona implements Serializable {
+    
+    private static final long SerialVersionUID=777L; //version
     
     private String usuario;
     private String password;
@@ -82,8 +85,8 @@ public class Usuario extends Persona {
     }
 
     public int enviar(Usuario u) {
-        int r = (int) ((u.getWifi()*0.6)+(wifi*0.85));
-        return r;
+        int tiempo = (int) ((u.getWifi()*0.6)+(wifi*0.85));
+        return tiempo;
     }
 
     
