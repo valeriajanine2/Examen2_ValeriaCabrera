@@ -80,6 +80,12 @@ public class Usuario extends Persona {
     public String toString() {
         return super.toString()+" "+usuario;
     }
+
+    public int enviar(Usuario u) {
+        int r = (int) ((u.getWifi()*0.6)+(wifi*0.85));
+        return r;
+    }
+
     
     
     
