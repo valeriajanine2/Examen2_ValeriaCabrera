@@ -81,7 +81,7 @@ public class Usuario extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString()+" "+usuario;
+        return usuario;
     }
 
     public int enviar(Usuario u) {

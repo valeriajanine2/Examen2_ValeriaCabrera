@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
@@ -11,7 +12,9 @@ import java.util.Date;
  *
  * @author Usuario
  */
-public class Mensajes {
+public class Mensajes implements Serializable {
+    
+    private static final long SerialVersionUID=555L; //version
     
     private String contenido;
     private String hora;

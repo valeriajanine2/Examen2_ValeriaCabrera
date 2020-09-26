@@ -1,5 +1,12 @@
 
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,7 +28,28 @@ public class MainExamen extends javax.swing.JFrame {
         
         jd_login.setModal(true); //no poder tocar a principal
         jd_login.pack();//tamaño se acople a los controles preestablecidos
+        jd_login.setLocationRelativeTo(this);//centro de la principal
         jd_login.setVisible(true);
+        
+        
+        //meter la info del binario al combobox
+        
+        binarioUsuario bu = new binarioUsuario("./Todos.users");
+        bu.cargarArchivo();
+        for (int i = 0; i < bu.getListaPersonas().size(); i++) {
+            
+            Usuario u = bu.getListaPersonas().get(i);
+            DefaultComboBoxModel mod = (DefaultComboBoxModel) cb_contactos.getModel();
+            mod.addElement(u);
+            cb_contactos.setModel(mod);
+            
+            DefaultComboBoxModel mo = (DefaultComboBoxModel) cb_users.getModel();
+            mo.addElement(u);
+            cb_contactos.setModel(mo);
+
+        }
+        
+       
         
     }
 
@@ -57,6 +85,55 @@ public class MainExamen extends javax.swing.JFrame {
         tf_apellidoR = new javax.swing.JTextField();
         tf_nombreR = new javax.swing.JTextField();
         tf_telefonoR = new javax.swing.JTextField();
+        jd_mensaje = new javax.swing.JDialog();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        tf_hora = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jdc_fecha = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tf_contenido = new javax.swing.JTextArea();
+        bt_enviarM = new javax.swing.JButton();
+        menu = new javax.swing.JPopupMenu();
+        jmi_leer = new javax.swing.JMenuItem();
+        jd_grupo = new javax.swing.JDialog();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        tf_nombreG = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        cb_users = new javax.swing.JComboBox<>();
+        bt_add = new javax.swing.JButton();
+        bt_crear = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jd_mensaje1 = new javax.swing.JDialog();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        tf_hora1 = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jdc_fecha1 = new com.toedter.calendar.JDateChooser();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tf_contenido1 = new javax.swing.JTextArea();
+        bt_enviarM1 = new javax.swing.JButton();
+        menu1 = new javax.swing.JPopupMenu();
+        jmi_leer1 = new javax.swing.JMenuItem();
+        jLabel12 = new javax.swing.JLabel();
+        bt_enviar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        cb_contactos = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        pb_main = new javax.swing.JProgressBar();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ta_mensaje = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
+        jb_crearG = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        cb_grupo = new javax.swing.JComboBox<>();
+        bt_enviarG = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Login");
@@ -73,6 +150,11 @@ public class MainExamen extends javax.swing.JFrame {
         });
 
         bt_login.setText("Log In");
+        bt_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_loginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_loginLayout = new javax.swing.GroupLayout(jd_login.getContentPane());
         jd_login.getContentPane().setLayout(jd_loginLayout);
@@ -209,17 +291,362 @@ public class MainExamen extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel13.setText("Redactar Mensaje");
+
+        jLabel14.setText("Hora:");
+
+        jLabel15.setText("Fecha:");
+
+        tf_contenido.setColumns(20);
+        tf_contenido.setRows(5);
+        jScrollPane2.setViewportView(tf_contenido);
+
+        bt_enviarM.setText("Enviar");
+        bt_enviarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_enviarMActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_mensajeLayout = new javax.swing.GroupLayout(jd_mensaje.getContentPane());
+        jd_mensaje.getContentPane().setLayout(jd_mensajeLayout);
+        jd_mensajeLayout.setHorizontalGroup(
+            jd_mensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_mensajeLayout.createSequentialGroup()
+                .addGroup(jd_mensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_mensajeLayout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(jLabel13))
+                    .addGroup(jd_mensajeLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(jd_mensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jd_mensajeLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(151, 151, 151)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdc_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jd_mensajeLayout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(bt_enviarM)))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jd_mensajeLayout.setVerticalGroup(
+            jd_mensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_mensajeLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel13)
+                .addGap(27, 27, 27)
+                .addGroup(jd_mensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jd_mensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tf_hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14)
+                        .addComponent(jLabel15))
+                    .addComponent(jdc_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bt_enviarM)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        jmi_leer.setText("Leer todo el chat");
+        jmi_leer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_leerActionPerformed(evt);
+            }
+        });
+        menu.add(jmi_leer);
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel20.setText("Crear Grupo");
+
+        jLabel21.setText("Nombre:");
+
+        jLabel22.setText("Usuarios:");
+
+        bt_add.setText("add");
+        bt_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_addActionPerformed(evt);
+            }
+        });
+
+        bt_crear.setText("Crear");
+        bt_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_crearActionPerformed(evt);
+            }
+        });
+
+        jList1.setModel(new DefaultListModel());
+        jScrollPane6.setViewportView(jList1);
+
+        javax.swing.GroupLayout jd_grupoLayout = new javax.swing.GroupLayout(jd_grupo.getContentPane());
+        jd_grupo.getContentPane().setLayout(jd_grupoLayout);
+        jd_grupoLayout.setHorizontalGroup(
+            jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_grupoLayout.createSequentialGroup()
+                .addGroup(jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jd_grupoLayout.createSequentialGroup()
+                            .addGap(237, 237, 237)
+                            .addComponent(jLabel20))
+                        .addGroup(jd_grupoLayout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addGroup(jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jd_grupoLayout.createSequentialGroup()
+                                    .addComponent(jLabel21)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tf_nombreG, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jd_grupoLayout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cb_users, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bt_add))))
+                        .addGroup(jd_grupoLayout.createSequentialGroup()
+                            .addGap(279, 279, 279)
+                            .addComponent(bt_crear))))
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+        jd_grupoLayout.setVerticalGroup(
+            jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_grupoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addGap(22, 22, 22)
+                .addGroup(jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(tf_nombreG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jd_grupoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(cb_users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_add))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(bt_crear)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        jLabel23.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel23.setText("Redactar Mensaje");
+
+        jLabel24.setText("Hora:");
+
+        jLabel25.setText("Fecha:");
+
+        tf_contenido1.setColumns(20);
+        tf_contenido1.setRows(5);
+        jScrollPane5.setViewportView(tf_contenido1);
+
+        bt_enviarM1.setText("Enviar");
+        bt_enviarM1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_enviarM1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_mensaje1Layout = new javax.swing.GroupLayout(jd_mensaje1.getContentPane());
+        jd_mensaje1.getContentPane().setLayout(jd_mensaje1Layout);
+        jd_mensaje1Layout.setHorizontalGroup(
+            jd_mensaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_mensaje1Layout.createSequentialGroup()
+                .addGroup(jd_mensaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_mensaje1Layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(jLabel23))
+                    .addGroup(jd_mensaje1Layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(jd_mensaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jd_mensaje1Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_hora1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(151, 151, 151)
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jdc_fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jd_mensaje1Layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(bt_enviarM1)))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jd_mensaje1Layout.setVerticalGroup(
+            jd_mensaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_mensaje1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel23)
+                .addGap(27, 27, 27)
+                .addGroup(jd_mensaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jd_mensaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tf_hora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel24)
+                        .addComponent(jLabel25))
+                    .addComponent(jdc_fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bt_enviarM1)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        jmi_leer1.setText("Ver el chat");
+        jmi_leer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_leer1ActionPerformed(evt);
+            }
+        });
+        menu1.add(jmi_leer1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel12.setText("Leogram");
+
+        bt_enviar.setText("Enviar Mensaje");
+        bt_enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_enviarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Tu Actividad");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Mensajes");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Grupos");
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTree1);
+
+        jLabel16.setText("Seleccione un amigo:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Hora", "Fecha", "Leído", "Contenido"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable1);
+
+        jLabel17.setText("Chats");
+
+        ta_mensaje.setColumns(20);
+        ta_mensaje.setRows(5);
+        jScrollPane4.setViewportView(ta_mensaje);
+
+        jLabel18.setText("Contenido");
+
+        jb_crearG.setText("Crear Grupo");
+        jb_crearG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_crearGActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Seleccione un grupo:");
+
+        bt_enviarG.setText("Enviar Mensaje");
+        bt_enviarG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_enviarGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(450, 450, 450)
+                .addComponent(jLabel12)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(bt_enviar)
+                            .addComponent(cb_contactos, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17)
+                            .addComponent(jb_crearG))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cb_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bt_enviarG))
+                                .addGap(63, 63, 63)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pb_main, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel19))))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cb_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pb_main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel17)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cb_contactos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(162, 162, 162)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bt_enviar)
+                                    .addComponent(bt_enviarG))
+                                .addGap(18, 18, 18)
+                                .addComponent(jb_crearG)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13))
         );
 
         pack();
@@ -247,9 +674,281 @@ public class MainExamen extends javax.swing.JFrame {
         
         jd_registro.setModal(true); //no poder tocar a principal
         jd_registro.pack();//tamaño se acople a los controles preestablecidos
+        jd_registro.setLocationRelativeTo(this);//centro de la principal
         jd_registro.setVisible(true);
         
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
+        //realizar el login
+        
+        boolean flag=true;
+        binarioUsuario bu = new binarioUsuario("./Todos.users");
+        bu.cargarArchivo();
+        for (int i = 0; i < bu.getListaPersonas().size(); i++) {
+            
+            Usuario u = bu.getListaPersonas().get(i);
+            
+            if (u.getUsuario().equals(tf_usuario.getText()) && u.getPassword().equals(pf_password.getText())) {
+                JOptionPane.showMessageDialog(jd_login, "Log in Successful");
+                jd_login.setVisible(false);
+                flag=false;
+                user=bu.getListaPersonas().get(i);
+            }
+            
+        }
+        if (flag) {
+            JOptionPane.showMessageDialog(jd_login, "La cuenta no existe");
+            tf_usuario.setText("");
+            pf_password.setText("");
+        }
+        bu.escribirArchivo();
+        
+    }//GEN-LAST:event_bt_loginActionPerformed
+
+    private void bt_enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enviarActionPerformed
+        //enviar mensaje que agrega al arbol
+        
+        jd_mensaje.setModal(true); //no poder tocar a principal
+        jd_mensaje.pack();//tamaño se acople a los controles preestablecidos
+        jd_mensaje.setLocationRelativeTo(this);//centro de la principal
+        jd_mensaje.setVisible(true);
+        
+    }//GEN-LAST:event_bt_enviarActionPerformed
+
+    private void bt_enviarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enviarMActionPerformed
+        // enviar mensaje que agrega el receptor al arbol
+        
+        pb_main.setValue(0);
+        user_seleccionado=(Usuario) cb_contactos.getSelectedItem();
+        
+        //hilo de barra
+        pb_main.setMaximum(user.enviar(user_seleccionado));
+        administrarBarra h = new administrarBarra(pb_main);
+        Thread proceso1 = new Thread(h);
+        //h.setLimite(user.enviar(user_seleccionado));
+        proceso1.start();//para comenzar la tarea
+
+        if (pb_main.getValue() == h.getLimite()) {
+
+            
+            jd_mensaje.setVisible(false);
+
+            //guardar el mensaje
+            Usuario us = (Usuario) cb_contactos.getSelectedItem();
+            Mensajes men = new Mensajes(tf_contenido.getText(), tf_hora.getText(), jdc_fecha.getDate(), false);
+            Privado priv = new Privado(us);
+            //priv.getListaMen().add(men);
+
+            //agregar al binario
+            binarioChats bu = new binarioChats("./" + us.getUsuario() + ".chat");
+            bu.cargarArchivo();
+            
+            
+            //agregar persona al arbol
+            DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
+            DefaultMutableTreeNode mensajes = (DefaultMutableTreeNode) raiz.getChildAt(0);
+            DefaultMutableTreeNode nodoAdd = new DefaultMutableTreeNode(cb_contactos.getSelectedItem());
+
+            int centinela = -1;
+            for (int i = 0; i < mensajes.getChildCount(); i++) {
+                if (mensajes.getChildAt(i).toString().equals(cb_contactos.getSelectedItem().toString())) {
+                    System.out.println("ya existe");
+                    bu.setMensaje(men);
+                    centinela = 1;
+                }//fin if
+            } //fin for  
+
+            if (centinela == -1) {
+                mensajes.add(nodoAdd);
+                bu.setMensaje(men);
+                
+            }  // fin if  
+
+            model.reload();
+
+            
+            bu.escribirArchivo();
+
+        }
+
+        
+
+        tf_contenido.setText("");
+        tf_hora.setText("");
+        jdc_fecha.setDate(new Date());
+        
+        
+        
+        
+    }//GEN-LAST:event_bt_enviarMActionPerformed
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        //right click para mostrar popup 
+        
+        if (evt.isMetaDown()) {
+            //seleccionar un nodo con click derecho
+            int row = jTree1.getClosestRowForLocation( //seleccionar el elemento más cercano
+                    evt.getX(), evt.getY());
+            jTree1.setSelectionRow(row);
+            Object v1 = jTree1.getSelectionPath().getLastPathComponent(); //objeto del nodo seleccionado
+            nodo_seleccionado = (DefaultMutableTreeNode) v1; //convertir a nodo
+
+            if (nodo_seleccionado.getUserObject() instanceof Usuario) { //si ese nodo es un usuario entonces...
+                user_seleccionado = (Usuario) nodo_seleccionado.getUserObject();
+                menu.show(evt.getComponent(), //aparece el menu solo si se cumple la condición
+                        evt.getX(), evt.getY());
+            } else if (nodo_seleccionado.getUserObject() instanceof Grupo) {
+                grupo_seleccionado = (Grupo) nodo_seleccionado.getUserObject();
+                menu1.show(evt.getComponent(), //aparece el menu solo si se cumple la condición
+                        evt.getX(), evt.getY());
+            }
+
+        }
+    }//GEN-LAST:event_jTree1MouseClicked
+
+    private void jmi_leerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_leerActionPerformed
+        // mostar los mensajes
+        
+        borrarTabla();
+        
+        DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+        
+        binarioChats bu = new binarioChats("./"+user_seleccionado.getUsuario()+".chat");
+        bu.cargarArchivo();
+        for (int i = 0; i < bu.getListaChats().size(); i++) {
+            Mensajes men = (Mensajes) bu.getListaChats().get(i);
+            Object[] newrow = {men.getHora(), men.getFecha(), men.isLeido(), men.getContenido()};
+            m.addRow(newrow);
+            
+        }
+        
+        jTable1.setModel(m);
+        
+    }//GEN-LAST:event_jmi_leerActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        //enseñar el contenido en el text area
+        
+        ta_mensaje.setText("");
+        
+        
+        ta_mensaje.setText((String)jTable1.getValueAt(jTable1.getSelectedRow(), 3));
+        jTable1.setValueAt(true, jTable1.getSelectedRow(), 2);
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jb_crearGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearGActionPerformed
+        //abrir dialog de grupo
+        
+        jd_grupo.setModal(true); //no poder tocar a principal
+        jd_grupo.pack();//tamaño se acople a los controles preestablecidos
+        jd_grupo.setLocationRelativeTo(this);//centro de la principal
+        jd_grupo.setVisible(true);
+    }//GEN-LAST:event_jb_crearGActionPerformed
+
+    private void bt_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addActionPerformed
+        // agregar a la lista
+        
+        DefaultListModel model = (DefaultListModel) jList1.getModel();
+        model.addElement(cb_users.getSelectedItem());
+        jList1.setModel(model);
+        
+        lista.add((Usuario)cb_users.getSelectedItem());
+        
+    }//GEN-LAST:event_bt_addActionPerformed
+
+    private void bt_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_crearActionPerformed
+        // crear un grupo
+        
+        Grupo g = new Grupo(tf_nombreG.getText(),user);
+        g.setMiembros(lista);
+        
+        DefaultComboBoxModel mod = (DefaultComboBoxModel) cb_grupo.getModel();
+        mod.addElement(g);
+        cb_grupo.setModel(mod);
+        
+    }//GEN-LAST:event_bt_crearActionPerformed
+
+    private void bt_enviarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enviarGActionPerformed
+        //abrir mensajes de grupo
+        
+        jd_mensaje1.setModal(true); //no poder tocar a principal
+        jd_mensaje1.pack();//tamaño se acople a los controles preestablecidos
+        jd_mensaje1.setLocationRelativeTo(this);//centro de la principal
+        jd_mensaje1.setVisible(true);
+        
+    }//GEN-LAST:event_bt_enviarGActionPerformed
+
+    private void bt_enviarM1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_enviarM1ActionPerformed
+        // enviar mensaje de grupo
+
+            jd_mensaje1.setVisible(false);
+
+            //guardar el mensaje
+            Grupo us = (Grupo) cb_grupo.getSelectedItem();
+            Mensajes men = new Mensajes(tf_contenido1.getText(), tf_hora1.getText(), jdc_fecha1.getDate(), false);
+
+            //agregar al binario
+            binarioChats bu = new binarioChats("./" + us.getNombre() + ".chat");
+            bu.cargarArchivo();
+            
+            
+            //agregar persona al arbol
+            DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) model.getRoot();
+            DefaultMutableTreeNode mensajes = (DefaultMutableTreeNode) raiz.getChildAt(1);
+            DefaultMutableTreeNode nodoAdd = new DefaultMutableTreeNode(cb_grupo.getSelectedItem());
+
+            int centinela = -1;
+            for (int i = 0; i < mensajes.getChildCount(); i++) {
+                if (mensajes.getChildAt(i).toString().equals(cb_grupo.getSelectedItem().toString())) {
+                    System.out.println("ya existe");
+                    bu.setMensaje(men);
+                    centinela = 1;
+                }//fin if
+            } //fin for  
+
+            if (centinela == -1) {
+                mensajes.add(nodoAdd);
+                bu.setMensaje(men);
+                
+            }  // fin if  
+
+            model.reload();
+
+            
+            bu.escribirArchivo();
+
+        
+
+        
+
+        tf_contenido1.setText("");
+        tf_hora1.setText("");
+        jdc_fecha.setDate(new Date());
+        
+    }//GEN-LAST:event_bt_enviarM1ActionPerformed
+
+    private void jmi_leer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_leer1ActionPerformed
+        // pasar a la tabla
+        
+        borrarTabla();
+        
+        DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+        
+        binarioChats bu = new binarioChats("./"+grupo_seleccionado.toString()+".chat");
+        bu.cargarArchivo();
+        for (int i = 0; i < bu.getListaChats().size(); i++) {
+            Mensajes men = (Mensajes) bu.getListaChats().get(i);
+            Object[] newrow = {men.getHora(), men.getFecha(), men.isLeido(), men.getContenido()};
+            m.addRow(newrow);
+            
+        }
+        
+        jTable1.setModel(m);
+    }//GEN-LAST:event_jmi_leer1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,7 +961,7 @@ public class MainExamen extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -285,14 +984,45 @@ public class MainExamen extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void borrarTabla() {
+        DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+        while (dm.getRowCount() > 0) {
+            dm.removeRow(0);
+        }
+        jTable1.setModel(dm);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_add;
+    private javax.swing.JButton bt_crear;
+    private javax.swing.JButton bt_enviar;
+    private javax.swing.JButton bt_enviarG;
+    private javax.swing.JButton bt_enviarM;
+    private javax.swing.JButton bt_enviarM1;
     private javax.swing.JButton bt_login;
     private javax.swing.JButton bt_registrar;
+    private javax.swing.JComboBox<String> cb_contactos;
+    private javax.swing.JComboBox<String> cb_grupo;
+    private javax.swing.JComboBox<String> cb_users;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -300,17 +1030,47 @@ public class MainExamen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTree jTree1;
+    private javax.swing.JButton jb_crearG;
+    private javax.swing.JDialog jd_grupo;
     private javax.swing.JDialog jd_login;
+    private javax.swing.JDialog jd_mensaje;
+    private javax.swing.JDialog jd_mensaje1;
     private javax.swing.JDialog jd_registro;
+    private com.toedter.calendar.JDateChooser jdc_fecha;
+    private com.toedter.calendar.JDateChooser jdc_fecha1;
+    private javax.swing.JMenuItem jmi_leer;
+    private javax.swing.JMenuItem jmi_leer1;
+    private javax.swing.JPopupMenu menu;
+    private javax.swing.JPopupMenu menu1;
+    private javax.swing.JProgressBar pb_main;
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JPasswordField pf_passwordR;
     private javax.swing.JSpinner sp_wifi;
+    private javax.swing.JTextArea ta_mensaje;
     private javax.swing.JTextField tf_apellidoR;
+    private javax.swing.JTextArea tf_contenido;
+    private javax.swing.JTextArea tf_contenido1;
+    private javax.swing.JTextField tf_hora;
+    private javax.swing.JTextField tf_hora1;
+    private javax.swing.JTextField tf_nombreG;
     private javax.swing.JTextField tf_nombreR;
     private javax.swing.JTextField tf_telefonoR;
     private javax.swing.JTextField tf_usuario;
     private javax.swing.JTextField tf_usuarioR;
     // End of variables declaration//GEN-END:variables
     Usuario user;
+    DefaultMutableTreeNode nodo_seleccionado;
+    Usuario user_seleccionado;
+    ArrayList<Usuario> lista=new ArrayList();
+    Grupo grupo_seleccionado;
 
 }
